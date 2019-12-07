@@ -12,15 +12,15 @@ Pre-built binaries used by VSCode Amiga Assembly extension
 
 - For Windows 64b: branch **windows_x64**
 
-`git clone --single-branch --branch windows_x64 git@github.com:prb28/vscode-amiga-assembly-binaries.git bin`
+`git clone --single-branch --branch windows_x64 https://github.com/prb28/vscode-amiga-assembly-binaries.git bin`
 
 - For OSX: branch **osx**
 
-`git clone --single-branch --branch osx git@github.com:prb28/vscode-amiga-assembly-binaries.git bin`
+`git clone --single-branch --branch osx https://github.com/prb28/vscode-amiga-assembly-binaries.git bin`
 
 - For Debian 64b: branch **debian_64**
 
-`git clone --single-branch --branch debian_64 git@github.com:prb28/vscode-amiga-assembly-binaries.git bin`
+`git clone --single-branch --branch debian_64 https://github.com/prb28/vscode-amiga-assembly-binaries.git bin`
 
 ## Getting the Zip files
 - Select the branch in Github according to your os 
