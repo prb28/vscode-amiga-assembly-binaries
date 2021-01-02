@@ -2,7 +2,6 @@ use_gui=no
 win32.start_not_captured=yes
 win32.nonotificationicon=yes
 boot_rom_uae=min
-quickstart=a500,1
 cpu_cycle_exact=true
 cpu_memory_cycle_exact=true
 blitter_cycle_exact=true
