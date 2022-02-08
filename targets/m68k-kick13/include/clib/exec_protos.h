@@ -1,183 +1,132 @@
-/* ERROR: The struct Resource doesn't exist in the includes,
-          in the autodocs is only an APTR */
-/* APTR */
-#ifndef EXEC_TYPES_H
+#ifndef CLIB_EXEC_PROTOS_H
+#define CLIB_EXEC_PROTOS_H
+
+
+/*
+**	$VER: exec_protos.h 34.106 (03.10.2019)
+**
+**	C prototypes. For use with 32 bit integers only.
+**
+**	Copyright © 2019 
+**	All Rights Reserved
+*/
+
+#ifndef  EXEC_TYPES_H
 #include <exec/types.h>
 #endif
-
-/* struct Library */
-#ifndef EXEC_LIBRARIES_H
-#include <exec/libraries.h>
-#endif
-
-/* struct Resident */
-#ifndef EXEC_RESIDENT_H 
-#include <exec/resident.h>
-#endif
-
-/* struct MsgPort, struct Message */
-#ifndef EXEC_PORTS_H 
-#include <exec/ports.h>
-#endif
-
-/* struct Interrupt */
-#ifndef EXEC_INTERRUPTS_H 
-#include <exec/interrupts.h>
-#endif
-
-/* struct List */
-#ifndef EXEC_LISTS_H 
-#include <exec/lists.h>
-#endif
-
-/* struct Node */
-#ifndef EXEC_NODES_H 
-#include <exec/nodes.h>
-#endif
-
-/* struct Task */
-#ifndef EXEC_TASKS_H 
+#ifndef  EXEC_TASKS_H
 #include <exec/tasks.h>
 #endif
-
-/* struct Device */
-#ifndef EXEC_DEVICES_H
+#ifndef  EXEC_MEMORY_H
+#include <exec/memory.h>
+#endif
+#ifndef  EXEC_PORTS_H
+#include <exec/ports.h>
+#endif
+#ifndef  EXEC_DEVICES_H
 #include <exec/devices.h>
 #endif
-
-/* struct IORequest, struct IOStdReq */
-#ifndef EXEC_IO_H 
+#ifndef  EXEC_IO_H
 #include <exec/io.h>
 #endif
-
-/* struct Semaphore, struct SignalSemaphore */
-#ifndef EXEC_SEMAPHORES_H 
+#ifndef  EXEC_SEMAPHORES_H
 #include <exec/semaphores.h>
 #endif
 
-/* struct MemHeader, struct MemList */
-#ifndef EXEC_MEMORY_H 
-#include <exec/memory.h>
-#endif
+ULONG Supervisor(ULONG (*userFunction)());
+VOID InitCode(ULONG startClass, ULONG version);
+VOID InitStruct(const void * initTable, void * memory, ULONG size);
+struct Library * MakeLibrary(const void * funcInit, const void * structInit,
+	ULONG (*libInit)(), ULONG dataSize, ULONG segList);
+VOID MakeFunctions(void * target, const void * functionArray, const void * funcDispBase);
+struct Resident * FindResident(const STRPTR name);
+void * InitResident(const struct Resident * resident, ULONG segList);
+VOID Alert(ULONG alertNum);
+VOID Debug(ULONG flags);
+VOID Disable(void);
+VOID Enable(void);
+VOID Forbid(void);
+VOID Permit(void);
+ULONG SetSR(ULONG newSR, ULONG mask);
+void * SuperState(void);
+VOID UserState(void * sysStack);
+struct Interrupt * SetIntVector(LONG intNumber, const struct Interrupt * interrupt);
+VOID AddIntServer(LONG intNumber, struct Interrupt * interrupt);
+VOID RemIntServer(LONG intNumber, struct Interrupt * interrupt);
+VOID Cause(struct Interrupt * interrupt);
+void * Allocate(struct MemHeader * freeList, ULONG byteSize);
+VOID Deallocate(struct MemHeader * freeList, void * memoryBlock, ULONG byteSize);
+void * AllocMem(ULONG byteSize, ULONG requirements);
+void * AllocAbs(ULONG byteSize, void * location);
+VOID FreeMem(void * memoryBlock, ULONG byteSize);
+ULONG AvailMem(ULONG requirements);
+struct MemList * AllocEntry(struct MemList * entry);
+VOID FreeEntry(struct MemList * entry);
+VOID Insert(struct List * list, struct Node * node, struct Node * pred);
+VOID AddHead(struct List * list, struct Node * node);
+VOID AddTail(struct List * list, struct Node * node);
+VOID Remove(struct Node * node);
+struct Node * RemHead(struct List * list);
+struct Node * RemTail(struct List * list);
+VOID Enqueue(struct List * list, struct Node * node);
+struct Node * FindName(struct List * list, const STRPTR name);
+void * AddTask(struct Task * task, const void * initPC, const void * finalPC);
+VOID RemTask(struct Task * task);
+struct Task * FindTask(const STRPTR name);
+BYTE SetTaskPri(struct Task * task, LONG priority);
+ULONG SetSignal(ULONG newSignals, ULONG signalSet);
+ULONG SetExcept(ULONG newSignals, ULONG signalSet);
+ULONG Wait(ULONG signalSet);
+VOID Signal(struct Task * task, ULONG signalSet);
+BYTE AllocSignal(LONG signalNum);
+VOID FreeSignal(LONG signalNum);
+LONG AllocTrap(LONG trapNum);
+VOID FreeTrap(LONG trapNum);
+VOID AddPort(struct MsgPort * port);
+VOID RemPort(struct MsgPort * port);
+VOID PutMsg(struct MsgPort * port, struct Message * message);
+struct Message * GetMsg(struct MsgPort * port);
+VOID ReplyMsg(struct Message * message);
+struct Message * WaitPort(struct MsgPort * port);
+struct MsgPort * FindPort(const STRPTR name);
+VOID AddLibrary(struct Library * library);
+VOID RemLibrary(struct Library * library);
+struct Library * OldOpenLibrary(const STRPTR libName);
+VOID CloseLibrary(struct Library * library);
+void * SetFunction(struct Library * library, LONG funcOffset, ULONG (*newFunction)());
+VOID SumLibrary(struct Library * library);
+VOID AddDevice(struct Device * device);
+VOID RemDevice(struct Device * device);
+BYTE OpenDevice(const STRPTR devName, ULONG unit, struct IORequest * ioRequest,
+	ULONG flags);
+VOID CloseDevice(struct IORequest * ioRequest);
+BYTE DoIO(struct IORequest * ioRequest);
+VOID SendIO(struct IORequest * ioRequest);
+BOOL CheckIO(struct IORequest * ioRequest);
+BYTE WaitIO(struct IORequest * ioRequest);
+VOID AbortIO(struct IORequest * ioRequest);
+VOID AddResource(void * resource);
+VOID RemResource(void * resource);
+void * OpenResource(const STRPTR resName);
+void * RawDoFmt(const STRPTR formatString, const void * dataStream,
+	VOID (*putChProc)(), void * putChData);
+ULONG GetCC(void);
+ULONG TypeOfMem(const void * address);
+ULONG Procure(struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg);
+VOID Vacate(struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg);
+struct Library * OpenLibrary(const STRPTR libName, ULONG version);
+VOID InitSemaphore(struct SignalSemaphore * sigSem);
+VOID ObtainSemaphore(struct SignalSemaphore * sigSem);
+VOID ReleaseSemaphore(struct SignalSemaphore * sigSem);
+ULONG AttemptSemaphore(struct SignalSemaphore * sigSem);
+VOID ObtainSemaphoreList(struct List * sigSem);
+VOID ReleaseSemaphoreList(struct List * sigSem);
+struct SignalSemaphore * FindSemaphore(STRPTR name);
+VOID AddSemaphore(struct SignalSemaphore * sigSem);
+VOID RemSemaphore(struct SignalSemaphore * sigSem);
+ULONG SumKickData(void);
+VOID AddMemList(ULONG size, ULONG attributes, LONG pri, void * base, const STRPTR name);
+VOID CopyMem(const void * source, void * dest, ULONG size);
+VOID CopyMemQuick(const void * source, void * dest, ULONG size);
 
-typedef void (*__fptr)();
-
-/*------ special functions ---------------------------------------------*/
-void InitCode(long, long);
-void InitStruct(char *, char *, long);
-struct Library *MakeLibrary(long**, char *, __fptr, long, char *);
-void MakeFunctions(char *, long**, long);
-struct Resident *FindResident(char *);
-void InitResident(struct Resident *, char *);
-void Alert(long, APTR);
-void Debug(long);
-/*------ interrupts ----------------------------------------------------*/
-void Disable(void);
-void Enable(void);
-void Forbid(void);
-void Permit(void);
-long SetSR(long, long);
-long SuperState(void);
-void UserState(char *);
-struct Interrupt *SetIntVector(long, struct Interrupt *);
-void AddIntServer(long, struct Interrupt *);
-void RemIntServer(long, struct Interrupt *);
-void Cause(struct Interrupt *);
-/*------ memory allocation: ---------------------------------------------*/
-void * Allocate(struct MemHeader *, long);
-void Deallocate(struct MemHeader *, void *, long);
-void* AllocMem(long, long);
-void AllocAbs(long, void*);
-void FreeMem(void *, long);
-long AvailMem(long);
-struct MemList * AllocEntry(struct MemList *);
-void FreeEntry(struct MemList *);
-/*------ lists: ---------------------------------------------------------*/
-void Insert(struct List *, struct Node *, struct Node *);
-void AddHead(struct List *, struct Node *);
-void AddTail(struct List *, struct Node *);
-void Remove(struct Node *);
-struct Node *RemHead(struct List *);
-struct Node *RemTail(struct List *);
-void Enqueue(struct List *, struct Node *);
-struct Node *FindName(struct List *, char *);
-/*------ tasks: ---------------------------------------------------------*/
-void AddTask(struct Task *, char *, char *);
-void RemTask(struct Task *);
-struct Task *FindTask(char *);
-long SetTaskPri(struct Task *, long);
-long SetSignal(long, long);
-long SetExcept(long, long);
-long Wait(long);
-void Signal(struct Task *, long);
-long AllocSignal(long);
-void FreeSignal(long);
-long AllocTrap(long);
-void FreeTrap(long);
-/*------ messages: ------------------------------------------------------*/
-void AddPort(struct MsgPort *);
-void RemPort(struct MsgPort *);
-void PutMsg(struct MsgPort *, struct Message *);
-struct Message *GetMsg(struct MsgPort *);
-void ReplyMsg(struct Message *);
-struct Message *WaitPort(struct MsgPort *);
-struct MsgPort *FindPort(char *);
-/*------ libraries: -----------------------------------------------------*/
-void AddLibrary(struct Library *);
-long RemLibrary(struct Library *);
-struct Library *OldOpenLibrary(char *);
-void CloseLibrary(struct Library *);
-__fptr SetFunction(struct Library *, long, __fptr);
-void SumLibrary(struct Library *);
-/*------ devices: -------------------------------------------------------*/
-void AddDevice(struct Device *);
-long RemDevice(struct Device *);
-long OpenDevice(char *, long, struct IORequest *, long);
-void CloseDevice(struct IORequest *);
-long DoIO(struct IORequest *);
-void SendIO(struct IORequest *);
-long CheckIO(struct IORequest *);
-long WaitIO(struct IORequest *);
-void AbortIO(struct IORequest *);
-/*------ resources: ----------------------------------------------------*/
-/* ERROR:
-void AddResource(struct Resource *);
-void RemResource(struct Resource *);
-struct Resource *OpenResource(char *, long); */
-/* Prototypes that appears in the Autodocs */
-void AddResource(APTR); 
-APTR OpenResource(char *); /* Only one argument in autodocs */
-void RemResource(APTR);
-
-/*------ new functions:*/
-long GetCC(void);
-void TypeOfMem(char *);
-long Procure(struct Semaphore *, struct Message *);
-void Vacate(struct Semaphore *);
-struct Library *OpenLibrary(char *, long);
-/*------ 1.2 new semaphore support*/
-void InitSemaphore(struct SignalSemaphore *);
-void ObtainSemaphore(struct SignalSemaphore *);
-void ReleaseSemaphore(struct SignalSemaphore *);
-long AttemptSemaphore(struct SignalSemaphore *);
-void ObtainSemaphoreList(struct List *);
-void ReleaseSemaphoreList(struct List *);
-struct SignalSemaphore *FindSemaphore(char *);
-void AddSemaphore(struct SignalSemaphore *);
-void RemSemaphore(struct SignalSemaphore *);
-/*------ 1.2 rom "kickstart" support + memory support*/
-void SumKickData(void);
-long AddMemList(long, long, long, char *, char *);
-void CopyMem(char *, char *, long);
-void CopyMemQuick(char *, char *, long);
-/*------ Common support library functions ---------*/
-void BeginIO(struct IORequest *);
-struct IORequest *CreateExtIO(struct MsgPort *, long);
-struct MsgPort *CreatePort(char *, long);
-struct IOStdReq *CreateStdIO(struct MsgPort *);
-struct Task *CreateTask(char *, long, char *, unsigned long);
-void DeleteExtIO(struct IORequest *);
-void DeletePort(struct MsgPort *);
-void DeleteStdIO(struct IOStdReq *);
-void DeleteTask(struct Task *);
-void NewList(struct List *);
+#endif	/*  CLIB_EXEC_PROTOS_H  */

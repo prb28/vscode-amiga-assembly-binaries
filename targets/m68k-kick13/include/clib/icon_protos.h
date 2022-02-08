@@ -1,29 +1,33 @@
-/* ERROR: struct WBObject doesn't exist and all those function using it
-          are not documented at all, but they appears in XXX_FD files.
-          In the includes for V36 appears the next message:
-          "Use DiskObjects instead of obsolete WBObjects"
-          And the functions handling WBObjects are not mor available. */
+#ifndef CLIB_ICON_PROTOS_H
+#define CLIB_ICON_PROTOS_H
 
-/* struct Library */
-#ifndef EXEC_LIBRARIES_H
-#include <exec/libraries.h>
+
+/*
+**	$VER: icon_protos.h 34.106 (03.10.2019)
+**
+**	C prototypes. For use with 32 bit integers only.
+**
+**	Copyright © 2019 
+**	All Rights Reserved
+*/
+
+#ifndef  EXEC_TYPES_H
+#include <exec/types.h>
 #endif
-
-/* struct DiskObject, struct FreeList */
-#ifndef WORKBENCH_WORKBENCH_H 
+#ifndef  WORKBENCH_WORKBENCH_H
 #include <workbench/workbench.h>
 #endif
 
-extern struct Library *IconBase;
+BOOL GetIcon(const STRPTR name, struct DiskObject * diskObject,
+	struct FreeList * freelist);
+BOOL PutIcon(const STRPTR name, struct DiskObject * diskObject);
+VOID FreeFreeList(struct FreeList * freelist);
+BOOL AddFreeList(struct FreeList * freelist, const void * mem, ULONG size);
+struct DiskObject * GetDiskObject(const STRPTR name);
+BOOL PutDiskObject(const STRPTR name, const struct DiskObject * diskobj);
+VOID FreeDiskObject(struct DiskObject * diskobj);
+UBYTE * FindToolType(const STRPTR * toolTypeArray, const STRPTR typeName);
+BOOL MatchToolValue(const STRPTR typeString, const STRPTR value);
+STRPTR BumpRevision(STRPTR newname, const STRPTR oldname);
 
-/*------ normal functions ---------------------------------------------*/
-long AddFreeList(struct FreeList *, char *, long);
-long BumpRevision(char *, char *);
-char * FindToolType(char **, char *);
-void FreeDiskObject(struct DiskObject *);
-void FreeFreeList(struct FreeList *);
-struct DiskObject *GetDiskObject(char *);
-long MatchToolValue(char **, char *);
-long PutDiskObject(char *, struct DiskObject *);
-long GetIcon(char *, struct DiskObject *, struct FreeList *);
-long PutIcon(char *, struct DiskObject *);
+#endif	/*  CLIB_ICON_PROTOS_H  */

@@ -9,7 +9,7 @@
 #endif
 
 #ifndef __NOLIBBASE__
-extern struct Library *ConsoleDevice;
+extern struct Device *ConsoleDevice;
 #endif
 
 #ifdef __GNUC__

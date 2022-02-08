@@ -5,55 +5,55 @@
 #include <exec/types.h>
 #endif
 
-float __SPAtan(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-30(a6)";
-#define SPAtan(d0arg) __SPAtan(MathTransBase, (d0arg))
+FLOAT __SPAtan(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-30(a6)";
+#define SPAtan(parm) __SPAtan(MathTransBase, (parm))
 
-float __SPSin(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-36(a6)";
-#define SPSin(d0arg) __SPSin(MathTransBase, (d0arg))
+FLOAT __SPSin(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-36(a6)";
+#define SPSin(parm) __SPSin(MathTransBase, (parm))
 
-float __SPCos(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-42(a6)";
-#define SPCos(d0arg) __SPCos(MathTransBase, (d0arg))
+FLOAT __SPCos(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-42(a6)";
+#define SPCos(parm) __SPCos(MathTransBase, (parm))
 
-float __SPTan(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-48(a6)";
-#define SPTan(d0arg) __SPTan(MathTransBase, (d0arg))
+FLOAT __SPTan(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-48(a6)";
+#define SPTan(parm) __SPTan(MathTransBase, (parm))
 
-float __SPSincos(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float* rightFloat)="\tjsr\t-54(a6)";
-#define SPSincos(leftFloat, rightFloat) __SPSincos(MathTransBase, (leftFloat), (rightFloat))
+FLOAT __SPSincos(__reg("a6") void *, __reg("d1") FLOAT * cosResult, __reg("d0") FLOAT parm)="\tjsr\t-54(a6)";
+#define SPSincos(cosResult, parm) __SPSincos(MathTransBase, (cosResult), (parm))
 
-float __SPSinh(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-60(a6)";
-#define SPSinh(d0arg) __SPSinh(MathTransBase, (d0arg))
+FLOAT __SPSinh(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-60(a6)";
+#define SPSinh(parm) __SPSinh(MathTransBase, (parm))
 
-float __SPCosh(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-66(a6)";
-#define SPCosh(d0arg) __SPCosh(MathTransBase, (d0arg))
+FLOAT __SPCosh(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-66(a6)";
+#define SPCosh(parm) __SPCosh(MathTransBase, (parm))
 
-float __SPTanh(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-72(a6)";
-#define SPTanh(d0arg) __SPTanh(MathTransBase, (d0arg))
+FLOAT __SPTanh(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-72(a6)";
+#define SPTanh(parm) __SPTanh(MathTransBase, (parm))
 
-float __SPExp(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-78(a6)";
-#define SPExp(d0arg) __SPExp(MathTransBase, (d0arg))
+FLOAT __SPExp(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-78(a6)";
+#define SPExp(parm) __SPExp(MathTransBase, (parm))
 
-float __SPLog(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-84(a6)";
-#define SPLog(d0arg) __SPLog(MathTransBase, (d0arg))
+FLOAT __SPLog(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-84(a6)";
+#define SPLog(parm) __SPLog(MathTransBase, (parm))
 
-float __SPPow(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float rightFloat)="\tjsr\t-90(a6)";
-#define SPPow(leftFloat, rightFloat) __SPPow(MathTransBase, (leftFloat), (rightFloat))
+FLOAT __SPPow(__reg("a6") void *, __reg("d1") FLOAT power, __reg("d0") FLOAT arg)="\tjsr\t-90(a6)";
+#define SPPow(power, arg) __SPPow(MathTransBase, (power), (arg))
 
-float __SPSqrt(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-96(a6)";
-#define SPSqrt(d0arg) __SPSqrt(MathTransBase, (d0arg))
+FLOAT __SPSqrt(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-96(a6)";
+#define SPSqrt(parm) __SPSqrt(MathTransBase, (parm))
 
-float __SPTieee(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-102(a6)";
-#define SPTieee(d0arg) __SPTieee(MathTransBase, (d0arg))
+FLOAT __SPTieee(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-102(a6)";
+#define SPTieee(parm) __SPTieee(MathTransBase, (parm))
 
-float __SPFieee(__reg("a6") void *, __reg("d0") long integer)="\tjsr\t-108(a6)";
-#define SPFieee(integer) __SPFieee(MathTransBase, (integer))
+FLOAT __SPFieee(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-108(a6)";
+#define SPFieee(parm) __SPFieee(MathTransBase, (parm))
 
-float __SPAsin(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-114(a6)";
-#define SPAsin(d0arg) __SPAsin(MathTransBase, (d0arg))
+FLOAT __SPAsin(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-114(a6)";
+#define SPAsin(parm) __SPAsin(MathTransBase, (parm))
 
-float __SPAcos(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-120(a6)";
-#define SPAcos(d0arg) __SPAcos(MathTransBase, (d0arg))
+FLOAT __SPAcos(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-120(a6)";
+#define SPAcos(parm) __SPAcos(MathTransBase, (parm))
 
-float __SPLog10(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-126(a6)";
-#define SPLog10(d0arg) __SPLog10(MathTransBase, (d0arg))
+FLOAT __SPLog10(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-126(a6)";
+#define SPLog10(parm) __SPLog10(MathTransBase, (parm))
 
 #endif /*  _VBCCINLINE_MATHTRANS_H  */

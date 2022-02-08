@@ -1,6 +1,5 @@
 #ifndef __ASSERT_H
 #define __ASSERT_H 1
-#endif
 
 #undef assert
 
@@ -13,3 +12,4 @@ extern void abort(void);
 #define assert(exp)
 #endif
 
+#endif

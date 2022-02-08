@@ -5,10 +5,10 @@
 #include <exec/types.h>
 #endif
 
-struct InputEvent * __CDInputHandler(__reg("a6") void *, __reg("a0") struct InputEvent * events, __reg("a1") struct Device * device)="\tjsr\t-42(a6)";
-#define CDInputHandler(events, device) __CDInputHandler(ConsoleDevice, (events), (device))
+struct InputEvent * __CDInputHandler(__reg("a6") void *, __reg("a0") const struct InputEvent * events, __reg("a1") struct Library * consoleDevice)="\tjsr\t-42(a6)";
+#define CDInputHandler(events, consoleDevice) __CDInputHandler(ConsoleDevice, (events), (consoleDevice))
 
-long __RawKeyConvert(__reg("a6") void *, __reg("a0") struct InputEvent * events, __reg("a1") char * buffer, __reg("d1") long length, __reg("a2") struct KeyMap * keyMap)="\tjsr\t-48(a6)";
+LONG __RawKeyConvert(__reg("a6") void *, __reg("a0") const struct InputEvent * events, __reg("a1") STRPTR buffer, __reg("d1") LONG length, __reg("a2") const struct KeyMap * keyMap)="\tjsr\t-48(a6)";
 #define RawKeyConvert(events, buffer, length, keyMap) __RawKeyConvert(ConsoleDevice, (events), (buffer), (length), (keyMap))
 
 #endif /*  _VBCCINLINE_CONSOLE_H  */

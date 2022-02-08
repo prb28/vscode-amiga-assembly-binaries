@@ -5,40 +5,40 @@
 #include <exec/types.h>
 #endif
 
-long __SPFix(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-30(a6)";
-#define SPFix(d0arg) __SPFix(MathBase, (d0arg))
+LONG __SPFix(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-30(a6)";
+#define SPFix(parm) __SPFix(MathBase, (parm))
 
-float __SPFlt(__reg("a6") void *, __reg("d0") long integer)="\tjsr\t-36(a6)";
+FLOAT __SPFlt(__reg("a6") void *, __reg("d0") LONG integer)="\tjsr\t-36(a6)";
 #define SPFlt(integer) __SPFlt(MathBase, (integer))
 
-long __SPCmp(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float rightFloat)="\tjsr\t-42(a6)";
-#define SPCmp(leftFloat, rightFloat) __SPCmp(MathBase, (leftFloat), (rightFloat))
+LONG __SPCmp(__reg("a6") void *, __reg("d1") FLOAT leftParm, __reg("d0") FLOAT rightParm)="\tjsr\t-42(a6)";
+#define SPCmp(leftParm, rightParm) __SPCmp(MathBase, (leftParm), (rightParm))
 
-long __SPTst(__reg("a6") void *, __reg("d1") float d1arg)="\tjsr\t-48(a6)";
-#define SPTst(d1arg) __SPTst(MathBase, (d1arg))
+LONG __SPTst(__reg("a6") void *, __reg("d1") FLOAT parm)="\tjsr\t-48(a6)";
+#define SPTst(parm) __SPTst(MathBase, (parm))
 
-float __SPAbs(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-54(a6)";
-#define SPAbs(d0arg) __SPAbs(MathBase, (d0arg))
+FLOAT __SPAbs(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-54(a6)";
+#define SPAbs(parm) __SPAbs(MathBase, (parm))
 
-float __SPNeg(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-60(a6)";
-#define SPNeg(d0arg) __SPNeg(MathBase, (d0arg))
+FLOAT __SPNeg(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-60(a6)";
+#define SPNeg(parm) __SPNeg(MathBase, (parm))
 
-float __SPAdd(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float rightFloat)="\tjsr\t-66(a6)";
-#define SPAdd(leftFloat, rightFloat) __SPAdd(MathBase, (leftFloat), (rightFloat))
+FLOAT __SPAdd(__reg("a6") void *, __reg("d1") FLOAT leftParm, __reg("d0") FLOAT rightParm)="\tjsr\t-66(a6)";
+#define SPAdd(leftParm, rightParm) __SPAdd(MathBase, (leftParm), (rightParm))
 
-float __SPSub(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float rightFloat)="\tjsr\t-72(a6)";
-#define SPSub(leftFloat, rightFloat) __SPSub(MathBase, (leftFloat), (rightFloat))
+FLOAT __SPSub(__reg("a6") void *, __reg("d1") FLOAT leftParm, __reg("d0") FLOAT rightParm)="\tjsr\t-72(a6)";
+#define SPSub(leftParm, rightParm) __SPSub(MathBase, (leftParm), (rightParm))
 
-float __SPMul(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float rightFloat)="\tjsr\t-78(a6)";
-#define SPMul(leftFloat, rightFloat) __SPMul(MathBase, (leftFloat), (rightFloat))
+FLOAT __SPMul(__reg("a6") void *, __reg("d1") FLOAT leftParm, __reg("d0") FLOAT rightParm)="\tjsr\t-78(a6)";
+#define SPMul(leftParm, rightParm) __SPMul(MathBase, (leftParm), (rightParm))
 
-float __SPDiv(__reg("a6") void *, __reg("d1") float leftFloat, __reg("d0") float rightFloat)="\tjsr\t-84(a6)";
-#define SPDiv(leftFloat, rightFloat) __SPDiv(MathBase, (leftFloat), (rightFloat))
+FLOAT __SPDiv(__reg("a6") void *, __reg("d1") FLOAT leftParm, __reg("d0") FLOAT rightParm)="\tjsr\t-84(a6)";
+#define SPDiv(leftParm, rightParm) __SPDiv(MathBase, (leftParm), (rightParm))
 
-float __SPFloor(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-90(a6)";
-#define SPFloor(d0arg) __SPFloor(MathBase, (d0arg))
+FLOAT __SPFloor(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-90(a6)";
+#define SPFloor(parm) __SPFloor(MathBase, (parm))
 
-float __SPCeil(__reg("a6") void *, __reg("d0") float d0arg)="\tjsr\t-96(a6)";
-#define SPCeil(d0arg) __SPCeil(MathBase, (d0arg))
+FLOAT __SPCeil(__reg("a6") void *, __reg("d0") FLOAT parm)="\tjsr\t-96(a6)";
+#define SPCeil(parm) __SPCeil(MathBase, (parm))
 
 #endif /*  _VBCCINLINE_MATHFFP_H  */
