@@ -3,7 +3,11 @@
 
 typedef unsigned char *va_list;
 
+#if __INTSIZE == 16
+#define __va_align(type) (__alignof(type)>=2?__alignof(type):2)
+#else
 #define __va_align(type) (__alignof(type)>=4?__alignof(type):4)
+#endif
 
 #define __va_do_align(vl,type) ((vl)=(char *)((((unsigned long)(vl))+__va_align(type)-1)/__va_align(type)*__va_align(type)))
 

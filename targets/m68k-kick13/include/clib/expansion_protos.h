@@ -1,49 +1,46 @@
-/* struct Library */
-#ifndef EXEC_LIBRARIES_H
-#include <exec/libraries.h>
-#endif
+#ifndef CLIB_EXPANSION_PROTOS_H
+#define CLIB_EXPANSION_PROTOS_H
 
-/* CPTR */
-#ifndef #ifndef EXEC_TYPES_H 
+
+/*
+**	$VER: expansion_protos.h 34.106 (03.10.2019)
+**
+**	C prototypes. For use with 32 bit integers only.
+**
+**	Copyright © 2019 
+**	All Rights Reserved
+*/
+
+#ifndef  EXEC_TYPES_H
 #include <exec/types.h>
 #endif
-
-/* struct DeviceNode */
-#ifndef LIBRARIES_FILEHANDLER_H
+#ifndef  LIBRARIES_CONFIGVARS_H
+#include <libraries/configvars.h>
+#endif
+#ifndef  LIBRARIES_FILEHANDLER_H
 #include <libraries/filehandler.h>
 #endif
 
-/* struct ConfigDev */
-#ifndef LIBRARIES_CONFIGVARS_H
-#include <libraries/configvars..h>
-#endif
+VOID AddConfigDev(struct ConfigDev * configDev);
+VOID AllocBoardMem(ULONG slotSpec);
+struct ConfigDev * AllocConfigDev(void);
+void * AllocExpansionMem(ULONG numSlots, ULONG slotAlign);
+VOID ConfigBoard(void * board, struct ConfigDev * configDev);
+VOID ConfigChain(void * baseAddr);
+struct ConfigDev * FindConfigDev(const struct ConfigDev * oldConfigDev, LONG manufacturer,
+	LONG product);
+VOID FreeBoardMem(ULONG startSlot, ULONG slotSpec);
+VOID FreeConfigDev(struct ConfigDev * configDev);
+VOID FreeExpansionMem(ULONG startSlot, ULONG numSlots);
+UBYTE ReadExpansionByte(const void * board, ULONG offset);
+VOID ReadExpansionRom(const void * board, struct ConfigDev * configDev);
+VOID RemConfigDev(struct ConfigDev * configDev);
+VOID WriteExpansionByte(void * board, ULONG offset, ULONG byte);
+VOID ObtainConfigBinding(void);
+VOID ReleaseConfigBinding(void);
+VOID SetCurrentBinding(struct CurrentBinding * currentBinding, ULONG bindingSize);
+ULONG GetCurrentBinding(const struct CurrentBinding * currentBinding, ULONG bindingSize);
+struct DeviceNode * MakeDosNode(const void * parmPacket);
+BOOL AddDosNode(LONG bootPri, ULONG flags, struct DeviceNode * deviceNode);
 
-#ifndef LIBRARIES_EXPANSION_H
-#include <libraries/expansion.h>
-#endif
-
-#ifndef LIBRARIES_EXPANSIONBASE_H
-#include <libraries/expansionbase.h>
-#endif
-
-void AddConfigDev(long);
-void AllocBoardMem(long);
-struct ConfigDev *AllocConfigDev(void);
-CPTR AllocExpansionMem(long, long, long);
-void ConfigBoard(long, long);
-void ConfigChain(long);
-struct ConfigDev *FindConfigDev(long, long, long);
-void FreeBoardMem(long, long);
-void FreeConfigDev(long);
-void FreeExpansionMem(long, long);
-void ReadExpansionByte(long, long);
-void ReadExpansionRom(long, long);
-void RemConfigDev(long);
-void WriteExpansionByte(long, long, long);
-void ObtainConfigBinding(void);
-void ReleaseConfigBinding(void);
-void SetCurrentBinding(long, long);
-void GetCurrentBinding(long, long);
-struct DeviceNode *MakeDosNode(long *);
-void AddDosNode(long, long, struct DeviceNode *);
-
+#endif	/*  CLIB_EXPANSION_PROTOS_H  */

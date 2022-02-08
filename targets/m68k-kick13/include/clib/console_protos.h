@@ -1,24 +1,32 @@
-/* struct Library */
-#ifndef EXEC_LIBRARIES_H
+#ifndef CLIB_CONSOLE_PROTOS_H
+#define CLIB_CONSOLE_PROTOS_H
+
+
+/*
+**	$VER: console_protos.h 34.106 (03.10.2019)
+**
+**	C prototypes. For use with 32 bit integers only.
+**
+**	Copyright © 2019 
+**	All Rights Reserved
+*/
+
+#ifndef  EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+#ifndef  EXEC_LIBRARIES_H
 #include <exec/libraries.h>
 #endif
-
-/* struct InputEvent*/
 #ifndef  DEVICES_INPUTEVENT_H
 #include <devices/inputevent.h>
 #endif
-
-/* struct Device */
-#ifndef EXEC_DEVICES_H
-#include <exec/devices.h>
-#endif
-
-/* struct KeyMap */
 #ifndef  DEVICES_KEYMAP_H
 #include <devices/keymap.h>
 #endif
 
-extern struct Library *ConsoleDevice;
+struct InputEvent * CDInputHandler(const struct InputEvent * events,
+	struct Library * consoleDevice);
+LONG RawKeyConvert(const struct InputEvent * events, STRPTR buffer, LONG length,
+	const struct KeyMap * keyMap);
 
-struct InputEvent *CDInputHandler(struct InputEvent *, struct Device *);
-long RawKeyConvert(struct InputEvent *, char *, long, struct KeyMap *);
+#endif	/*  CLIB_CONSOLE_PROTOS_H  */

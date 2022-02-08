@@ -1,118 +1,117 @@
-/* struct IntuitionBase */
-#ifndef INTUITION_INTUITIONBASE_H 
-#include <intuition/intuitionbase.h>
-#endif
+#ifndef CLIB_INTUITION_PROTOS_H
+#define CLIB_INTUITION_PROTOS_H
 
-/* struct Screen, struct NewScreen */
-#ifndef INTUITION_SCREENS_H 
-#include <intuition/screens.h>
-#endif
 
-/* struct Border, struct Image, struct Gadget, struct IntuiText, 
-   struct Menu, struct MenuItem, struct Remember, struct Requester,
-   struct Window, struct NewWindow */
-#ifndef INTUITION_INTUITION_H 
+/*
+**	$VER: intuition_protos.h 34.106 (03.10.2019)
+**
+**	C prototypes. For use with 32 bit integers only.
+**
+**	Copyright © 2019 
+**	All Rights Reserved
+*/
+
+#ifndef  EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+#ifndef  INTUITION_INTUITION_H
 #include <intuition/intuition.h>
 #endif
 
-/* struct InputEvent */
-#ifndef DEVICES_INPUTEVENT_H 
-#include <devices/inputevent.h>
-#endif
+VOID OpenIntuition(void);
+VOID Intuition(struct InputEvent * iEvent);
+UWORD AddGadget(struct Window * window, struct Gadget * gadget, ULONG position);
+BOOL ClearDMRequest(struct Window * window);
+VOID ClearMenuStrip(struct Window * window);
+VOID ClearPointer(struct Window * window);
+BOOL CloseScreen(struct Screen * screen);
+VOID CloseWindow(struct Window * window);
+LONG CloseWorkBench(void);
+VOID CurrentTime(ULONG * seconds, ULONG * micros);
+BOOL DisplayAlert(ULONG alertNumber, const STRPTR string, ULONG height);
+VOID DisplayBeep(struct Screen * screen);
+BOOL DoubleClick(ULONG sSeconds, ULONG sMicros, ULONG cSeconds, ULONG cMicros);
+VOID DrawBorder(struct RastPort * rp, const struct Border * border, LONG leftOffset,
+	LONG topOffset);
+VOID DrawImage(struct RastPort * rp, struct Image * image, LONG leftOffset,
+	LONG topOffset);
+VOID EndRequest(struct Requester * requester, struct Window * window);
+struct Preferences * GetDefPrefs(struct Preferences * preferences, LONG size);
+struct Preferences * GetPrefs(struct Preferences * preferences, LONG size);
+VOID InitRequester(struct Requester * requester);
+struct MenuItem * ItemAddress(const struct Menu * menuStrip, ULONG menuNumber);
+BOOL ModifyIDCMP(struct Window * window, ULONG flags);
+VOID ModifyProp(struct Gadget * gadget, struct Window * window,
+	struct Requester * requester, ULONG flags, ULONG horizPot,
+	ULONG vertPot, ULONG horizBody, ULONG vertBody);
+VOID MoveScreen(struct Screen * screen, LONG dx, LONG dy);
+VOID MoveWindow(struct Window * window, LONG dx, LONG dy);
+VOID OffGadget(struct Gadget * gadget, struct Window * window,
+	struct Requester * requester);
+VOID OffMenu(struct Window * window, ULONG menuNumber);
+VOID OnGadget(struct Gadget * gadget, struct Window * window,
+	struct Requester * requester);
+VOID OnMenu(struct Window * window, ULONG menuNumber);
+struct Screen * OpenScreen(const struct NewScreen * newScreen);
+struct Window * OpenWindow(const struct NewWindow * newWindow);
+ULONG OpenWorkBench(void);
+VOID PrintIText(struct RastPort * rp, const struct IntuiText * iText, LONG left,
+	LONG top);
+VOID RefreshGadgets(struct Gadget * gadgets, struct Window * window,
+	struct Requester * requester);
+UWORD RemoveGadget(struct Window * window, struct Gadget * gadget);
+VOID ReportMouse(LONG flag, struct Window * window);
+VOID ReportMouse1(struct Window * flag, LONG window);
+BOOL Request(struct Requester * requester, struct Window * window);
+VOID ScreenToBack(struct Screen * screen);
+VOID ScreenToFront(struct Screen * screen);
+BOOL SetDMRequest(struct Window * window, struct Requester * requester);
+BOOL SetMenuStrip(struct Window * window, struct Menu * menu);
+VOID SetPointer(struct Window * window, UWORD * pointer, LONG height, LONG width,
+	LONG xOffset, LONG yOffset);
+VOID SetWindowTitles(struct Window * window, const STRPTR windowTitle,
+	const STRPTR screenTitle);
+VOID ShowTitle(struct Screen * screen, LONG showIt);
+VOID SizeWindow(struct Window * window, LONG dx, LONG dy);
+struct View * ViewAddress(void);
+struct ViewPort * ViewPortAddress(const struct Window * window);
+VOID WindowToBack(struct Window * window);
+VOID WindowToFront(struct Window * window);
+BOOL WindowLimits(struct Window * window, LONG widthMin, LONG heightMin, ULONG widthMax,
+	ULONG heightMax);
+struct Preferences  * SetPrefs(const struct Preferences * preferences, LONG size,
+	LONG inform);
+LONG IntuiTextLength(const struct IntuiText * iText);
+BOOL WBenchToBack(void);
+BOOL WBenchToFront(void);
+BOOL AutoRequest(struct Window * window, const struct IntuiText * body,
+	const struct IntuiText * posText, const struct IntuiText * negText,
+	ULONG pFlag, ULONG nFlag, ULONG width, ULONG height);
+VOID BeginRefresh(struct Window * window);
+struct Window * BuildSysRequest(struct Window * window, const struct IntuiText * body,
+	const struct IntuiText * posText, const struct IntuiText * negText,
+	ULONG flags, ULONG width, ULONG height);
+VOID EndRefresh(struct Window * window, LONG complete);
+VOID FreeSysRequest(struct Window * window);
+VOID MakeScreen(struct Screen * screen);
+VOID RemakeDisplay(void);
+VOID RethinkDisplay(void);
+void * AllocRemember(struct Remember ** rememberKey, ULONG size, ULONG flags);
+VOID FreeRemember(struct Remember ** rememberKey, LONG reallyForget);
+ULONG LockIBase(ULONG dontknow);
+VOID UnlockIBase(ULONG ibLock);
+LONG GetScreenData(void * buffer, ULONG size, ULONG type, const struct Screen * screen);
+VOID RefreshGList(struct Gadget * gadgets, struct Window * window,
+	struct Requester * requester, LONG numGad);
+UWORD AddGList(struct Window * window, struct Gadget * gadget, ULONG position,
+	LONG numGad, struct Requester * requester);
+UWORD RemoveGList(struct Window * remPtr, struct Gadget * gadget, LONG numGad);
+VOID ActivateWindow(struct Window * window);
+VOID RefreshWindowFrame(struct Window * window);
+BOOL ActivateGadget(struct Gadget * gadgets, struct Window * window,
+	struct Requester * requester);
+VOID NewModifyProp(struct Gadget * gadget, struct Window * window,
+	struct Requester * requester, ULONG flags, ULONG horizPot,
+	ULONG vertPot, ULONG horizBody, ULONG vertBody, LONG numGad);
 
-/* struct Preferences */
-#ifndef INTUITION_PREFERENCES_H 
-#include <intuition/preferences.h>
-#endif
-
-/* struct RastPort */
-#ifndef GRAPHICS_RASTPORT_H 
-#include <graphics/rastport.h>
-#endif 
-
-/* struct View, struct ViewPort */
-#ifndef GRAPHICS_VIEW_H
-#include <graphics/view.h>
-#endif 
-
-extern struct IntuitionBase *IntuitionBase;
-void OpenIntuition(void);
-void Intuition(struct InputEvent);
-long AddGadget(struct Window *, struct Gadget *, long);
-long ClearDMRequest(struct Window *);
-void ClearMenuStrip(struct Window *);
-void ClearPointer(struct Window *);
-void CloseScreen(struct Screen *);
-void CloseWindow(struct Window *);
-long CloseWorkBench(void);
-void CurrentTime(long *, long *);
-long DisplayAlert(long, char *, long);
-void DisplayBeep(struct Screen *);
-long DoubleClick(long, long, long, long);
-void DrawBorder(struct RastPort *, struct Border *, long, long);
-void DrawImage(struct RastPort *, struct Image *, long, long);
-void EndRequest(struct Requester *, struct Window *);
-struct Preferences *GetDefPrefs(struct Preferences *, long);
-struct Preferences *GetPrefs(struct Preferences *, long);
-void InitRequester(struct Requester *);
-struct MenuItem *ItemAddress(struct Menu *, long);
-void ModifyIDCMP(struct Window *, long);
-void ModifyProp(struct Gadget *, struct Window *, struct Requester *, long, long, long, long, long);
-void MoveScreen(struct Screen *, long, long);
-void MoveWindow(struct Window *, long, long);
-void OffGadget(struct Gadget *, struct Window *, struct Requester *);
-void OffMenu(struct Window *, long);
-void OnGadget(struct Gadget *, struct Window *, struct Requester *);
-void OnMenu(struct Window *, long);
-struct Screen *OpenScreen(struct NewScreen *);
-struct Window *OpenWindow(struct NewWindow *);
-long OpenWorkBench(void);
-void PrintIText(struct RastPort *, struct IntuiText *, long, long);
-void RefreshGadgets(struct Gadget *, struct Window *, struct Requester *);
-long RemoveGadget(struct Window *, struct Gadget *);
-void ReportMouse(struct Window *, long);
-long Request(struct Requester *, struct Window *);
-void ScreenToBack(struct Screen *);
-void ScreenToFront(struct Screen *);
-long SetDMRequest(struct Window *, struct Requester *);
-void SetMenuStrip(struct Window *, struct Menu *);
-void SetPointer(struct Window *, short *, long, long, long, long);
-void SetWindowTitles(struct Window *, char *, char *);
-void ShowTitle(struct Screen *, long);
-void SizeWindow(struct Window *, long, long);
-struct View *ViewAddress(void);
-struct ViewPort *ViewPortAddress(struct Window *);
-void WindowToBack(struct Window *);
-void WindowToFront(struct Window *);
-long WindowLimits(struct Window *, long, long, long, long);
-/*--- start of next generation of names ---------------------------------------*/
-void SetPrefs(struct Preferences *, long, long);
-/*--- start of next next generation of names ----------------------------------*/
-long IntuiTextLength(struct IntuiText *);
-long WBenchToBack(void);
-long WBenchToFront(void);
-/*--- start of next next next generation of names -----------------------------*/
-long AutoRequest(struct Window *, struct IntuiText *, struct IntuiText *, struct IntuiText *, long, long, long, long);
-void BeginRefresh(struct Window *);
-struct Window *BuildSysRequest(struct Window *, struct IntuiText *, struct IntuiText *, struct IntuiText *, long, long, long);
-void EndRefresh(struct Window *, long);
-void FreeSysRequest(struct Window *);
-void MakeScreen(struct Screen *);
-void RemakeDisplay(void);
-void RethinkDisplay(void);
-/*--- start of next next next next generation of names ------------------------*/
-char *AllocRemember(struct Remember **, long, long);
-void AlohaWorkbench(long);
-void FreeRemember(struct Remember **, long);
-/*--- start of 15 Nov 85 names ------------------------*/
-long  LockIBase(long);
-void UnlockIBase(long);
-/*--- start of post-1.1 names ----*/
-long GetScreenData(char *, long, long, struct Screen *);
-void RefreshGList(struct Gadget *, struct Window *, struct Requester *, long);
-long AddGList(struct Window *, struct Gadget *, long, long, struct Requester *);
-long RemoveGList(struct Window *, struct Gadget *, long);
-void ActivateWindow(struct Window *);
-void RefreshWindowFrame(struct Window *);
-long ActivateGadget(struct Gadget *, struct Window *, struct Requester *);
-void NewModifyProp(struct Gadget *, struct Window *, struct Requester *, long, long, long, long, long, long);
+#endif	/*  CLIB_INTUITION_PROTOS_H  */

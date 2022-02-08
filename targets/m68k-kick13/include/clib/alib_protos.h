@@ -17,27 +17,27 @@ void BeginIO(struct IORequest *);
 struct IORequest *CreateExtIO(struct MsgPort *, long);
 struct MsgPort *CreatePort(char *, long);
 struct IOStdReq *CreateStdIO(struct MsgPort *);
-struct Task *CreateTask(char *, long, char *, unsigned long);
+struct Task *CreateTask(char *, long, void *, unsigned long);
 void DeleteExtIO(struct IORequest *);
 void DeletePort(struct MsgPort *);
 void DeleteStdIO(struct IOStdReq *);
 void DeleteTask(struct Task *);
 void NewList(struct List *);
 
-APTR LibAllocPooled( APTR poolHeader, ULONG memSize );
-APTR LibCreatePool( ULONG memFlags, ULONG puddleSize, ULONG threshSize );
-VOID LibDeletePool( APTR poolHeader );
-VOID LibFreePooled( APTR poolHeader, APTR memory, ULONG memSize );
+void *LibAllocPooled(void *, ULONG);
+void *LibCreatePool(ULONG, ULONG, ULONG);
+VOID LibDeletePool(void *);
+VOID LibFreePooled(void *, void *, ULONG);
 
 /* Assorted functions in amiga.lib */
 
-ULONG FastRand( ULONG seed );
-UWORD RangeRand( ULONG maxValue );
+ULONG FastRand(ULONG);
+UWORD RangeRand(ULONG);
 
 /* Graphics support functions in amiga.lib */
 
-VOID AddTOF( struct Isrvstr *i, LONG (*p)(APTR args), APTR a );
-VOID RemTOF( struct Isrvstr *i );
-VOID waitbeam( LONG b );
+VOID AddTOF(struct Isrvstr *, LONG (*)(void *), void *);
+VOID RemTOF(struct Isrvstr * );
+VOID waitbeam(LONG);
 
 #endif   /* CLIB_ALIB_PROTOS_H */

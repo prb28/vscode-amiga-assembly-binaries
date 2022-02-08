@@ -1,28 +1,36 @@
-/* struct Library */
-#ifndef EXEC_LIBRARIES_H
-#include <exec/libraries.h>
+#ifndef CLIB_MATHIEEEDOUBTRANS_PROTOS_H
+#define CLIB_MATHIEEEDOUBTRANS_PROTOS_H
+
+
+/*
+**	$VER: mathieeedoubtrans_protos.h 34.106 (03.10.2019)
+**
+**	C prototypes. For use with 32 bit integers only.
+**
+**	Copyright © 2019 
+**	All Rights Reserved
+*/
+
+#ifndef  EXEC_TYPES_H
+#include <exec/types.h>
 #endif
 
-extern struct Library *MathIeeeDoubTransBase;
-double IEEEDPAtan(double);
-double IEEEDPSin(double);
-double IEEEDPCos(double);
-double IEEEDPTan(double);
-double IEEEDPSincos(double, double*);
-double IEEEDPSinh(double);
-double IEEEDPCosh(double);
-double IEEEDPTanh(double);
-double IEEEDPExp(double);
-double IEEEDPLog(double);
-double IEEEDPPow(double, double);
-double IEEEDPSqrt(double);
-double IEEEDPTieee(double);
-double IEEEDPFieee(long);
-/*------------------------------------------------*/
-/*                                                */
-/*      New functions added for Release 1.1       */
-/*                                                */
-/*------------------------------------------------*/
-double IEEEDPAsin(double);
-double IEEEDPAcos(double);
-double IEEEDPLog10(double);
+DOUBLE IEEEDPAtan(DOUBLE parm);
+DOUBLE IEEEDPSin(DOUBLE parm);
+DOUBLE IEEEDPCos(DOUBLE parm);
+DOUBLE IEEEDPTan(DOUBLE parm);
+DOUBLE IEEEDPSincos(DOUBLE * pf2, DOUBLE parm);
+DOUBLE IEEEDPSinh(DOUBLE parm);
+DOUBLE IEEEDPCosh(DOUBLE parm);
+DOUBLE IEEEDPTanh(DOUBLE parm);
+DOUBLE IEEEDPExp(DOUBLE parm);
+DOUBLE IEEEDPLog(DOUBLE parm);
+DOUBLE IEEEDPPow(DOUBLE exp, DOUBLE arg);
+DOUBLE IEEEDPSqrt(DOUBLE parm);
+FLOAT IEEEDPTieee(DOUBLE parm);
+DOUBLE IEEEDPFieee(FLOAT single);
+DOUBLE IEEEDPAsin(DOUBLE parm);
+DOUBLE IEEEDPAcos(DOUBLE parm);
+DOUBLE IEEEDPLog10(DOUBLE parm);
+
+#endif	/*  CLIB_MATHIEEEDOUBTRANS_PROTOS_H  */

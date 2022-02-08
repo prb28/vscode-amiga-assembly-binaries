@@ -9,7 +9,7 @@
 #endif
 
 #ifndef __NOLIBBASE__
-extern struct Library *TimerBase;
+extern struct Device *TimerBase;
 #endif
 
 #ifdef __GNUC__

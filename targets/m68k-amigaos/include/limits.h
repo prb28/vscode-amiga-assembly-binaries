@@ -4,8 +4,13 @@
 #define MB_LEN_MAX 1
 
 #define CHAR_BIT 8
+#if __INTSIZE == 16
+#define INT_MAX 32767
+#define INT_MIN (-32768)
+#else
 #define INT_MAX 2147483647
 #define INT_MIN (-2147483647-1)
+#endif
 #define LONG_MAX 2147483647L
 #define LONG_MIN (-2147483647L-1)
 #define SCHAR_MAX +127
@@ -15,7 +20,11 @@
 #define SHRT_MAX 32767
 #define SHRT_MIN (-32768)
 #define UCHAR_MAX 255U
+#if __INTSIZE == 16
+#define UINT_MAX 65535U
+#else
 #define UINT_MAX 4294967295U
+#endif
 #define ULONG_MAX 4294967295UL
 #define USHRT_MAX 65535U
 
@@ -26,4 +35,3 @@
 #endif
 
 #endif
-
